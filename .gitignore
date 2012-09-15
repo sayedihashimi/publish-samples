@@ -1,6 +1,17 @@
-# Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
-bin
-obj
+# Folders to ignore #
+OutputRoot/
+TestResults/
+bin/
+obj/
+_UpgradeReport_Files/
+packages/
+build-out
 
-# mstest test results
-TestResults
+# Known files to ignore always #
+*.suo
+*.user
+~*.docx
+msbuild*.log
+.dbshell
+*.private
+UpgradeLog*.xml
