@@ -3,6 +3,7 @@
 - [How to exclude files on publish (_file system method_)](FileSysExcludeFiles/readme.md)
 - [How do you include or exclude files using VS web deployment packages?](include-and-exclude-files.md)
 - [MSDeploy how to skip multiple files](msdeploy.exe/skip-multiple.md)
+- [MSDeploy how to publish a folder with msdeploy.exe ](how-to-publish-a-folder.md)
 
 
 ---
