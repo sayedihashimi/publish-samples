@@ -2,6 +2,6 @@
 
 ---
 
-Copyright 2012 | All Rights Reserved
+Copyright 2012 Sayed Ibrahim Hashimi | All Rights Reserved
 
 </footer>
