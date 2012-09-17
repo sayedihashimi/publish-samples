@@ -13,7 +13,8 @@ To sync source to dest the command would be:
         -dest:contentPath="C:\Data\Personal\My Repo\MSDeploy\MultiSkip\Dest"
 
 The changes are show in figure below.
-![alt text][2]
+
+![cmd window][2]
 
 With no skips there are 19 changes.
 
@@ -28,7 +29,7 @@ Then the command to skip the sub03 directory would  be:
 
 The result would be:
 
-![alt text][3]
+![cmd window][3]
 
 So there are 14 added files.
 
@@ -43,7 +44,9 @@ To skip 2 directories the command would be
         -skip:objectName=dirPath,absolutePath="sub02"
 
 Then the result of that is
-![alt text][4]
+
+![cmd window][4]
+
 There are only 9 changes here so we can see that multiple skips does work.
 
   [1]: /images/0ChoV.png

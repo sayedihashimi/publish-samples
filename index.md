@@ -5,3 +5,5 @@
 - [How to take your app offline during a build + publish with MSBuild](wap-publish-app-offline.md)
 - [MSDeploy how to skip multiple files](msdeploy.exe/skip-multiple.md)
 - [MSDeploy how to publish a folder with msdeploy.exe ](how-to-publish-a-folder.md)
+- [MSDeploy how to set folder permissions on publish](msdeploy-setAcl.md)
+- [How to disable automatic folder permissions updates on publish](wap-publish-prevent-auto-setAcl.md)
