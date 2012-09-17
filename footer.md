@@ -1,2 +1,4 @@
----
-Copyright 2012 | All Rights Reserved
+<footer>
+	---
+	Copyright 2012 | All Rights Reserved
+</footer>
