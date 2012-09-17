@@ -1,3 +1,19 @@
+# Web Publishing docs
+
+- [How to exclude files on publish (_file system method_)](FileSysExcludeFiles/readme.md)
+- [MSDeploy how to skip multiple files](msdeploy.exe/skip-multiple.md)
+
+
+---
+
+---
+
+---
+
+
+
+
+
 # Web Application Project Deployment Overview for Visual Studio and ASP.NET #
 
 This topic provides an overview of the tasks that are required to publish (deploy) a Visual Studio web application project to a server where others can access the application over the Internet.
