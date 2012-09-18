@@ -197,6 +197,8 @@ This is implemented inside of the DeleteAppOffline target. This target will auto
 
 If you do try this out please let me know if you run into any issues. I am thinking to create a Nuget package from this so that you can just install that package. That would take a bit of work so please let me know if you are interested in that.
 
+# sample edit
+
 ##Resources
 
  1. [The latest version of my AppOffline wpp.targets file][2]
