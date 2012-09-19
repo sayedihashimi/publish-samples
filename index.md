@@ -1,3 +1,4 @@
+*WEEKLY*
 # Web Publishing docs
 
 - [How to exclude files on publish (_file system method_)](FileSysExcludeFiles/readme.md)
