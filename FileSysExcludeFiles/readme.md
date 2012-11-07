@@ -11,4 +11,6 @@ By default for a [Web Appliction Project](http://msdn.microsoft.com/en-us/librar
 
 
 ### Modify Publish Profile (.pubxml)
-You can exclude files from a File System publish by populating the MSBuild item list, 
+You can exclude files from a File System publish by populating the MSBuild item list..
+
+TODO: Finish this
