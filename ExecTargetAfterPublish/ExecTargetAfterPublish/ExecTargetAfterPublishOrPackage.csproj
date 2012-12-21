@@ -72,7 +72,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\AfterPublish.pubxml" />
-    <None Include="Properties\PublishProfiles\AfterPackage.pubxml" />
+    <None Include="Properties\PublishProfiles\AfterPackage.pubxml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
