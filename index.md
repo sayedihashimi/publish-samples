@@ -7,3 +7,4 @@
 - [MSDeploy how to publish a folder with msdeploy.exe ](how-to-publish-a-folder.md)
 - [MSDeploy how to set folder permissions on publish](msdeploy-setAcl.md)
 - [How to disable automatic folder permissions updates on publish](wap-publish-prevent-auto-setAcl.md)
+- [How to publish from the command line using MSBuild](publish-using-msbuild.md)
