@@ -1,3 +1,6 @@
+<article class="docItem">
+<article class="pageCenter">
+
 # How to sync multiple folders with Web Deploy (MSDeploy)
 
 I received a email from someone asking how you could use Web Deploy to sync multiple folders. I thought I’d share with you what I wrote to him.
@@ -51,3 +54,6 @@ Then to do the sync you can use the command.
 The real issue I have with this approach is that it requires both a source & dest manifest. If you can easily auto generate these files from a list of shares that would be great. If you are maintaining these files “by hand” you should be careful to make sure both files are updated.
 
 With a bit of more work you can boil it down to a single source manifest if you have a common root folder, and you want the files to be reflected in the same relative structure underneath that. They way that you would do this is to use the MSDeploy auto provider trick. With MSDeploy you can pass –dest:auto and MSDeploy will essentially reflect the source settings to the destination. You can then create an MSDeploy parameter which will be used to update the path of that common root folder.
+
+</article>
+</article>

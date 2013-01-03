@@ -1,3 +1,6 @@
+<article class="docItem">
+<article class="pageCenter">
+
 # How to publish the contents of a folder with msdeploy.exe
 
 ## Q: How can you publish the contents of a folder using msdeploy.exe?
@@ -79,3 +82,6 @@ In your case I noted that you were using `dest:auto`, you can use that but you w
   [3]: http://technet.microsoft.com/en-us/library/dd569001%28v=WS.10%29.aspx
   [4]: https://www.windowsazure.com/en-us/home/features/web-sites/?WT.mc_id=cmp_pst001_blg_post0171web
   [5]: images/IdD9H.png
+
+</article>
+</article>

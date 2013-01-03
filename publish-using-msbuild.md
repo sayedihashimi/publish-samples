@@ -1,3 +1,6 @@
+<article class="docItem">
+<article class="pageCenter">
+
 # How to publish from the command line using MSBuild
 
 In Visual Studio 2012 (_as well as the publish updates available in the [Azure SDK][1] for VS 2010_) we have simplified command line publishing for web projects. We have done that by using Publish Profiles. To publish from the command follow the steps below.
@@ -22,3 +25,6 @@ On a somewhat different, but related, note if you are building the .csproj/.vbpr
 
 
   [1]: http://www.windowsazure.com/en-us/develop/net/
+
+</article>
+</article>

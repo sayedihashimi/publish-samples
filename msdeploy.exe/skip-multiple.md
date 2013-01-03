@@ -1,3 +1,6 @@
+<article class="docItem">
+<article class="pageCenter">
+
 # MSDeploy how to skip multiple files
 
 When publishing content using msdeploy.exe you can skip files with th -skip directive. Here you'll see how you can skip multiple items.
@@ -53,3 +56,7 @@ There are only 9 changes here so we can see that multiple skips does work.
   [2]: /images/ThEX5.png
   [3]: /images/p9VPT.png
   [4]: /images/Nm3sD.png
+
+
+</article>
+</article>

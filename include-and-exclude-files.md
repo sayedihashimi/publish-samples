@@ -1,3 +1,6 @@
+<article class="docItem">
+<article class="pageCenter">
+
 # How do you include or exclude files using VS web deployment packages?
 
 ## Including Extra Files
@@ -45,3 +48,6 @@ This statement will include all the targets and tasks that we need. Most of our 
 
 By declaring populating this item the files will automatically be excluded. Note the usage of the FromTarget metadata here. I will not get into that here, but you should know to always specify that.
   [1]: http://sedodream.com/2010/05/01/WebDeploymentToolMSDeployBuildPackageIncludingExtraFilesOrExcludingSpecificFiles.aspx
+
+</article>
+</article>

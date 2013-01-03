@@ -1,3 +1,6 @@
+<article class="docItem">
+<article class="pageCenter">
+
 # How to set permissions on a folder during publish
 
 ## Q: How can I set permissions on a folder when I publish my web project using MSBuild and MSDeploy?
@@ -49,3 +52,6 @@ To explain this a bit, the target SetupCustomAcls will cause a new SetAcl entry 
 The DeclareCustomParameters is where the custom MSDeploy parameter will be created. That target will execute after the **AddIisAndContentDeclareParametersItems** target. We do this to ensure that the property **_EscapeRegEx_MSDeployDirPath** is populated. Notice inside that target when I declare the value of the parameter (inside the Value element) that I use the property **_DestinationContentPath** which is the MSBuild property containing the path to where your app is being deployed, i.e. *REST Services/1.0.334*.
 
 Can you try that out and let me know if it worked for you or not?
+
+</article>
+</article>

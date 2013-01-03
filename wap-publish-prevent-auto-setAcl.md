@@ -1,3 +1,6 @@
+<article class="docItem">
+<article class="pageCenter">
+
 # How to disable automatic folder permissions updates on publish
 
 ## Q: By default during publish folder permissions are set on App_Data. How can I prevent this from happening?
@@ -21,3 +24,7 @@ By default we will call the Web Deploy SetAcl provider on the App_Data folder, t
 Inside of this file you can see that I'm declaring that property and setting it's value to False. After you have this file it will automatically be picked up by our publishing process, both from Visual Studio as well as any publish operations from the command line.
 
 Can you try that out and let me know if you have further issues?
+
+
+</article>
+</article>

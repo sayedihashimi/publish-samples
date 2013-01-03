@@ -1,3 +1,6 @@
+<article class="docItem">
+<article class="pageCenter">
+
 # How to take your app offline during publish using MSBuild
 
 ## Q: How can I take my app offline, using app_offline.htm, during a build + publish using MSBuild?
@@ -206,3 +209,6 @@ If you do try this out please let me know if you run into any issues. I am think
   [1]: images/IzAgq.png
   [2]: http://sedodream.com/ct.ashx?id=bc2ced18-9064-4f51-9167-05ec5595291c&url=https://github.com/sayedihashimi/sayed-samples/blob/master/AppOfflineDemo01/AppOfflineDemo01/AppOfflineDemo01.wpp.targets
   [3]: http://sedodream.com/ct.ashx?id=bc2ced18-9064-4f51-9167-05ec5595291c&url=http://weblogs.asp.net/scottgu/archive/2006/04/09/442332.aspx
+
+</article>
+</article>

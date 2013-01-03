@@ -16,7 +16,7 @@
 <span class="textXxl">Using msdeploy.exe</span>
 
 - [MSDeploy how to skip multiple files](msdeploy.exe/skip-multiple.md)
-- [MSDeploy how to publish a folder with msdeploy.exe ](how-to-publish-a-folder.md)
+- [MSDeploy how to publish a folder with msdeploy.exe](how-to-publish-a-folder.md)
 - [MSDeploy how to set folder permissions on publish](msdeploy-setAcl.md)
 
 </span>

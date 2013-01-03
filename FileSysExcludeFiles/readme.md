@@ -1,3 +1,6 @@
+<article class="docItem">
+<article class="pageCenter">
+
 # File System Publishing
 
 There are two ways to exclude files from being published when the File System web publish method is used.
@@ -16,3 +19,6 @@ You can exclude files from a File System publish by populating the MSBuild item 
 TODO: Finish this
 
 ### Another change here
+
+</article>
+</article>
