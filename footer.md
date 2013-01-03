@@ -1,7 +1,6 @@
 <footer>
+        <section>
 
----
-
-Copyright 2012 Sayed Ibrahim Hashimi | All Rights Reserved
-
+<p id="legal"> --- (c) 2012 <a href="http://sedodream.com/">Sayed Ibrahim Hashimi</a>. All Rights Reserved. --- </p>
+</section>
 </footer>

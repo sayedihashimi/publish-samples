@@ -1,6 +1,6 @@
 # How do you include or exclude files using VS web deployment packages?
 
-**Including Extra Files**
+## Including Extra Files
 
 Including extra files into the package is a bit harder but still no bigee if you are comfortable with MSBuild, and if you are not then read this.  In order to do this we need to hook into the part of the process that collects the files for packaging. The target we need to extend is called CopyAllFilesToSingleFolder. This target has a dependency property, PipelinePreDeployCopyAllFilesToOneFolderDependsOn, that we can tap into and inject our own target. So we will create a target named CustomCollectFiles and inject that into the process. We achieve this with the following (remember after the import statement).
 
@@ -27,7 +27,7 @@ Here what I did was create the item _CustomFiles and in the Include attribute to
 
 Then I use this item to populate the FilesForPackagingFromProject item. This is the item that MSDeploy actually uses to add extra files. Also notice that I declared the metadata DestinationRelativePath value. This will determine the relative path that it will be placed in the package. I used the statement Extra Files%(RecursiveDir)%(Filename)%(Extension) here. What that is saying is to place it in the same relative location in the package as it is under the Extra Files folder.
 
-**Excluding files**
+## Excluding files
 
 If you open the project file of a web application created with VS 2010 towards the bottom of it you will find a line with.
 
