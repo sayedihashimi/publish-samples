@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<parameters >
+
+  <parameter name="email" description="desciption">
+    <parameterEntry kind="XmlFile" 
+                    scope="\\web.config$" 
+                    match="/configuration/appSettings/add[@key='email']/@value" />
+  </parameter>
+
+  <parameter name="url" description="desciption">
+    <parameterEntry kind="XmlFile" 
+                    scope="\\web.config$" 
+                    match="/configuration/appSettings/add[@key='url']/@value" />
+  </parameter>
+
+</parameters>
