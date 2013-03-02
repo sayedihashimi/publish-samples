@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\siteone.pubxml" />
+    <None Include="Properties\PublishProfiles\sitetwo-Priority.pubxml" />
     <None Include="Properties\PublishProfiles\sitetwo.pubxml" />
   </ItemGroup>
   <PropertyGroup>
