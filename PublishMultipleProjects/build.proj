@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)'=='' ">Release</Configuration>
+    <OutDir Condition=" '$(OutDir)'=='' ">$(MSBuildProjectDirectory)\BuildOutput\</OutDir>
+    <SourceDir Condition=" '$(SourceDir)'==''">$(MSBuildProjectDirectory)\</SourceDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Contains the list of projects/solutions which will be built. -->
+    <ProjectsToBuild Include="$(SourceDir)\PublishMultipleProjects.sln" />
+
+    <!-- Contains the list of projects to be published -->
+    <ProjectsToPublish Include="$(SourceDir)FrontendWeb\FrontendWeb.csproj">
+      <!-- Define all project specific properties in the manner below -->
+      <AdditionalProperties>PublishProfile=Local;Password=pwd</AdditionalProperties>
+    </ProjectsToPublish>
+    <ProjectsToPublish Include="$(SourceDir)AdminWeb\AdminWeb.csproj">
+      <AdditionalProperties>PublishProfile=ToLocal;Password=pwdhere</AdditionalProperties>
+    </ProjectsToPublish>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <BuildDependsOn>
+      PrepareForBuild;
+      CoreBuild;
+    </BuildDependsOn>
+  </PropertyGroup>
+  <Target Name="Build" DependsOnTargets="$(BuildDependsOn)" />
+  <Target Name="CoreBuild">
+    <Message Text="Building projects [@(ProjectsToBuild)]"/>
+
+    <MSBuild Projects="@(ProjectsToBuild)"
+             Properties="Configuration=$(Configuration);OutDir=$(OutDir)"/>
+  </Target>
+
+  <Target Name="Publish" DependsOnTargets="Build">
+    <!-- publish all the projects in ProjectsToPublish -->
+    <MSBuild Projects="@(ProjectsToPublish)"
+             Properties="Configuration=$(Configuration);OutDir=$(OutDir);DeployOnBuild=true"/>
+  </Target>
+
+  <Target Name="PrepareForBuild">
+    <MakeDir Directories="$(OutDir)"/>
+  </Target>
+</Project>

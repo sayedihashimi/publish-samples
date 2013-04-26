@@ -1,6 +1,7 @@
 # Folders to ignore #
 OutputRoot/
 TestResults/
+BuildOutput/
 bin/
 obj/
 _UpgradeReport_Files/
