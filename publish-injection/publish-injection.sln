@@ -8,7 +8,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{D488A7AD-7FA7-4CBF-A991-7100E4B1CB6A}"
 	ProjectSection(SolutionItems) = preProject
 		build\publish.proj = build\publish.proj
+		build\ToFileSys.pubxml = build\ToFileSys.pubxml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyOtherSite", "MyOtherSite\MyOtherSite.csproj", "{0AE5CF81-D320-439B-91D9-4137A079EC8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +23,10 @@ Global
 		{AE97D1FD-82EE-40F7-BAEA-8A246E793C41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE97D1FD-82EE-40F7-BAEA-8A246E793C41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE97D1FD-82EE-40F7-BAEA-8A246E793C41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AE5CF81-D320-439B-91D9-4137A079EC8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AE5CF81-D320-439B-91D9-4137A079EC8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AE5CF81-D320-439B-91D9-4137A079EC8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AE5CF81-D320-439B-91D9-4137A079EC8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

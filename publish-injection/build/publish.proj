@@ -6,14 +6,14 @@
     2. It is used by the publish process during the build of MySite to configure/extend publish
         Note: 1. Is kicked off by the use on the cmd line/build server. 2. Is invoked by this script itself.
               This file is injected into the publish process via the PublishProfile property.
-  -->
-  
+  -->  
   <PropertyGroup>
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)'=='' ">11.0</VisualStudioVersion>
-    <OutputRoot Condition=" '$(OutputRoot)'=='' ">$(MSBuildThisFileDirectory)..\BuildOutput\</OutputRoot>
     <Configuration Condition=" '$(Configuration)'=='' ">Release</Configuration>
-    <PublishFolder Condition=" '$(PublishFolder)'==''">C:\temp\Publish\MySite\</PublishFolder>
-    
+    <!-- Location for build output of the project -->
+    <OutputRoot Condition=" '$(OutputRoot)'=='' ">$(MSBuildThisFileDirectory)..\BuildOutput\</OutputRoot>
+    <!-- Root for the publish output -->
+    <PublishFolder Condition=" '$(PublishFolder)'==''">C:\temp\Publish\Output\</PublishFolder>    
   </PropertyGroup>
   
   <ItemGroup>
@@ -23,7 +23,20 @@
         Configuration=$(Configuration);
         OutputPath=$(OutputRoot);
         WebPublishMethod=FileSystem;
-        publishUrl=$(PublishFolder);
+        publishUrl=$(PublishFolder)MySite\;
+        DeployOnBuild=true;
+        DeployTarget=WebPublish;
+        PublishProfile=$(MSBuildThisFileFullPath)
+      </AdditionalProperties>
+    </ProjectsToBuild>
+
+    <ProjectsToBuild Include="$(MSBuildThisFileDirectory)..\MyOtherSite\MyOtherSite.csproj">
+      <AdditionalProperties>
+        VisualStudioVersion=$(VisualStudioVersion);
+        Configuration=$(Configuration);
+        OutputPath=$(OutputRoot);
+        WebPublishMethod=FileSystem;
+        publishUrl=$(PublishFolder)MyOtherSite\;
         DeployOnBuild=true;
         DeployTarget=WebPublish;
         PublishProfile=$(MSBuildThisFileFullPath)
