@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="BuildProjects">
+  <!-- 
+  This file is used in two ways.
+    1. Drive the build and publish process
+    2. It is used by the publish process during the build of MySite to configure/extend publish
+        Note: 1. Is kicked off by the use on the cmd line/build server. 2. Is invoked by this script itself.
+              This file is injected into the publish process via the PublishProfile property.
+  -->  
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)'=='' ">11.0</VisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)'=='' ">Release</Configuration>
+    <!-- Location for build output of the project -->
+    <OutputRoot Condition=" '$(OutputRoot)'=='' ">$(MSBuildThisFileDirectory)..\BuildOutput\</OutputRoot>
+    <!-- Root for the publish output -->
+    <PublishFolder Condition=" '$(PublishFolder)'==''">C:\temp\Publish\Output\</PublishFolder>    
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectsToBuild Include="$(MSBuildThisFileDirectory)..\MySite\MySite.csproj">
+      <AdditionalProperties>
+        VisualStudioVersion=$(VisualStudioVersion);
+        Configuration=$(Configuration);
+        OutputPath=$(OutputRoot);
+        WebPublishMethod=FileSystem;
+        publishUrl=$(PublishFolder)MySite\;
+        DeployOnBuild=true;
+        DeployTarget=WebPublish;
+        PublishProfile=$(MSBuildThisFileFullPath)
+      </AdditionalProperties>
+    </ProjectsToBuild>
+
+    <ProjectsToBuild Include="$(MSBuildThisFileDirectory)..\MyOtherSite\MyOtherSite.csproj">
+      <AdditionalProperties>
+        VisualStudioVersion=$(VisualStudioVersion);
+        Configuration=$(Configuration);
+        OutputPath=$(OutputRoot);
+        WebPublishMethod=FileSystem;
+        publishUrl=$(PublishFolder)MyOtherSite\;
+        DeployOnBuild=true;
+        DeployTarget=WebPublish;
+        PublishProfile=$(MSBuildThisFileFullPath)
+      </AdditionalProperties>
+    </ProjectsToBuild>
+  </ItemGroup>
+  
+  <Target Name="BuildProjects">
+    <MSBuild Projects="@(ProjectsToBuild)" />
+  </Target>
+
+  <!-- ***************************************************************************************
+ The targets below will be called during the publish process.
+ These targets are injected into the publish process for each web project.
+ These targets will not have access to any new values for properties/items from
+ the targets above this.
+ *************************************************************************************** -->
+
+  <Target Name="AfterWebPublish" AfterTargets="WebPublish">
+    <Message Text="Inside AfterWebPublish" Importance="high"/>
+  </Target>
+  
+</Project>
