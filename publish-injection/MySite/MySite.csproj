@@ -103,16 +103,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-
   <Target Name="AfterBuild">
-    <Message Text="
-        Configuration=$(Configuration);
-        OutputPath=$(OutputPath);
-        WebPublishMethod=$(WebPublishMethod);
-        publishUrl=$(publishUrl);
-        DeployOnBuild=$(DeployOnBuild);
-        DeployTarget=$(DeployTarget);
-        PublishProfile=$(PublishProfile)"/>
+    <Message Text="&#xD;&#xA;        Configuration=$(Configuration);&#xD;&#xA;        OutputPath=$(OutputPath);&#xD;&#xA;        WebPublishMethod=$(WebPublishMethod);&#xD;&#xA;        publishUrl=$(publishUrl);&#xD;&#xA;        DeployOnBuild=$(DeployOnBuild);&#xD;&#xA;        DeployTarget=$(DeployTarget);&#xD;&#xA;        PublishProfile=$(PublishProfile)" />
   </Target>
-  
 </Project>

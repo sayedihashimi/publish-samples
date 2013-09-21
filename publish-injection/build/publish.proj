@@ -1,8 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="BuildProjects">
   <!-- 
-  This file has two purposes:
-    1. Build and
+  This file is used in two ways.
+    1. Drive the build and publish process
+    2. It is used by the publish process during the build of MySite to configure/extend publish
+        Note: 1. Is kicked off by the use on the cmd line/build server. 2. Is invoked by this script itself.
+              This file is injected into the publish process via the PublishProfile property.
   -->
   
   <PropertyGroup>
