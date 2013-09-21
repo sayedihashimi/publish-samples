@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="BuildProjects">
+  <!-- 
+  This file has two purposes:
+    1. Build and
+  -->
+  
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)'=='' ">11.0</VisualStudioVersion>
+    <OutputRoot Condition=" '$(OutputRoot)'=='' ">$(MSBuildThisFileDirectory)..\BuildOutput\</OutputRoot>
+    <Configuration Condition=" '$(Configuration)'=='' ">Release</Configuration>
+    <PublishFolder Condition=" '$(PublishFolder)'==''">C:\temp\Publish\MySite\</PublishFolder>
+    
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectsToBuild Include="$(MSBuildThisFileDirectory)..\MySite\MySite.csproj">
+      <AdditionalProperties>
+        VisualStudioVersion=$(VisualStudioVersion);
+        Configuration=$(Configuration);
+        OutputPath=$(OutputRoot);
+        WebPublishMethod=FileSystem;
+        publishUrl=$(PublishFolder);
+        DeployOnBuild=true;
+        DeployTarget=WebPublish;
+        PublishProfile=$(MSBuildThisFileFullPath)
+      </AdditionalProperties>
+    </ProjectsToBuild>
+  </ItemGroup>
+  
+  <Target Name="BuildProjects">
+    <MSBuild Projects="@(ProjectsToBuild)" />
+  </Target>
+
+  <!-- ***************************************************************************************
+ The targets below will be called during the publish process.
+ These targets are injected into the publish process for each web project.
+ These targets will not have access to any new values for properties/items from
+ the targets above this.
+ *************************************************************************************** -->
+
+  <Target Name="AfterWebPublish" AfterTargets="WebPublish">
+    <Message Text="Inside AfterWebPublish" Importance="high"/>
+  </Target>
+  
+</Project>
