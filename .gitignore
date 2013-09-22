@@ -4,6 +4,7 @@ TestResults/
 BuildOutput/
 bin/
 obj/
+logs/
 _UpgradeReport_Files/
 packages/
 build-out

@@ -9,6 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminArea", "AdminArea\Admi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HrArea", "HrArea\HrArea.csproj", "{AB7FA4B2-BD0B-4B90-8E94-1C36CB13F5C3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{A569C864-999D-41D0-BC17-863C10BED6AB}"
+	ProjectSection(SolutionItems) = preProject
+		Build\publish.proj = Build\publish.proj
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

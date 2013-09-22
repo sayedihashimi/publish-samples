@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="DoNothing">
+  <!-- 
+  This file is used in two ways.
+    1. Drive the build and publish process
+    2. It is used by the publish process during the build of MySite to configure/extend publish
+        Note: 1. Is kicked off by the use on the cmd line/build server. 2. Is invoked by this script itself.
+              This file is injected into the publish process via the PublishProfile property.
+  -->  
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)'=='' ">11.0</VisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)'=='' ">Release</Configuration>
+    <SourceRoot Condition=" '$(SourceRoot)'=='' ">$(MSBuildThisFileDirectory)..\</SourceRoot>
+    <!-- Location for build output of the project -->
+    <OutputRoot Condition=" '$(OutputRoot)'=='' ">$(MSBuildThisFileDirectory)..\BuildOutput\</OutputRoot>
+    <!-- Root for the publish output -->
+    <PublishFolder Condition=" '$(PublishFolder)'==''">C:\temp\Publish\MySite\</PublishFolder>
+    <DeployOnBuild Condition=" '$(DeployOnBuild)'=='' ">true</DeployOnBuild>
+    <BuildBeforePublish Condition=" '$(BuildBeforePublish)'=='' ">true</BuildBeforePublish>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectsToBuild Include="$(SourceRoot)RootSite\_RootSite.csproj">
+      <AdditionalProperties>publishUrl=$(PublishFolder);</AdditionalProperties>
+    </ProjectsToBuild>
+
+    <ProjectsToBuild Include="$(SourceRoot)AdminArea\AdminArea.csproj">
+      <AdditionalProperties>publishUrl=$(PublishFolder)Areas\Admin\;</AdditionalProperties>
+    </ProjectsToBuild>
+
+    <ProjectsToBuild Include="$(SourceRoot)HrArea\HrArea.csproj">
+      <AdditionalProperties>publishUrl=$(PublishFolder)Areas\HR\;</AdditionalProperties>
+    </ProjectsToBuild>
+  </ItemGroup>
+
+  <Target Name="DoNothing">
+    <Message Text="Inside DoNothing"/>
+  </Target>
+  
+  <PropertyGroup>
+    <BuildAndPublishDependsOn>
+      $(BuildAndPublishDependsOn);
+      CoreBuildAndPublish;
+      Publish
+    </BuildAndPublishDependsOn>
+  </PropertyGroup>
+  <Target Name="BuildAndPublish" DependsOnTargets="$(BuildAndPublishDependsOn)" />
+  
+  <Target Name="CoreBuildAndPublish">
+    <Message Text="Building and publishing all projects in ProjectsToBuild [@(ProjectsToBuild)]"
+             Condition=" '$(DeployOnBuild)'=='true' "/>
+    <Message Text="Building all projects in ProjectsToBuild [@(ProjectsToBuild)]"
+             Condition=" '$(DeployOnBuild)'!='true' "/>
+    
+    <MSBuild Projects="@(ProjectsToBuild)"
+             Properties="
+                VisualStudioVersion=$(VisualStudioVersion);
+                Configuration=$(Configuration);
+                OutputPath=$(OutputRoot);
+                WebPublishMethod=FileSystem;
+                DeployOnBuild=$(DeployOnBuild);
+                DeployTarget=WebPublish;
+                PublishProfile=$(MSBuildThisFileFullPath)" />
+  </Target>
+
+
+  <PropertyGroup>
+    <ProdPublishFolder Condition=" '$(ProdPublishFolder)'=='' ">C:\temp\Publish\MySite-Prod\</ProdPublishFolder>
+
+    <!-- If /p:BuildBeforPublish is true then invoke build before any publish operations. -->
+    <PublishComputeItemsDependsOn Condition=" '$(BuildBeforePublish)'=='true' ">$(PublishComputeItemsDependsOn);BuildAndPublish</PublishComputeItemsDependsOn>
+    
+    <PublishComputeItemsDependsOn>$(PublishComputeItemsDependsOn);</PublishComputeItemsDependsOn>
+    <PublishMySiteBinDependsOn>$(PublishMySiteBinDependsOn);PublishComputeItems</PublishMySiteBinDependsOn>
+    <PublishMySiteAllDependsOn>$(PublishMySiteAllDependsOn);PublishComputeItems</PublishMySiteAllDependsOn>
+    <PublishAdminAreaDependsOn>$(PublishAdminAreaDependsOn);PublishComputeItems</PublishAdminAreaDependsOn>
+    <PublishHrAreaDependsOn>$(PublishHrAreaDependsOn);PublishComputeItems</PublishHrAreaDependsOn>  
+  </PropertyGroup>
+
+  
+  <!-- 
+  This target populates the publish items so that they can be
+  used in the Publish* targets.
+  -->
+  <Target Name="PublishComputeItems" DependsOnTargets="$(PublishComputeItemsDependsOn)">
+    <ItemGroup>
+      <PubMySiteBinFiles Include="$(PublishFolder)bin\**\*"/>
+
+      <PubMySiteAll Include="$(PublishFolder)**\*"/>
+
+      <PubMySiteAdminArea Include="$(PublishFolder)Areas\Admin\**\*"/>
+      
+      <PubMySiteHrArea Include="$(PublishFolder)Areas\HR\**\*"/>
+    </ItemGroup>
+  </Target>
+
+  <!-- This is just a placeholder target so that we can specify /p:PublishTargets from the cmd line -->
+  <Target Name="Publish" DependsOnTargets="$(PublishTargets.Split('|'))"></Target>
+  
+  <Target Name="PublishMySiteBin" 
+          DependsOnTargets="$(PublishMySiteBinDependsOn)"
+          Inputs="@(PubMySiteBinFiles)" 
+          Outputs="@(PubMySiteBinFiles->'$(ProdPublishFolder)bin\%(RecursiveDir)%(FileName)%(Extension)')">
+    <Copy SourceFiles="@(PubMySiteBinFiles)" 
+          DestinationFiles="@(PubMySiteBinFiles->'$(ProdPublishFolder)bin\%(RecursiveDir)%(FileName)%(Extension)')"/>
+  </Target>
+  
+  <Target Name="PublishMySiteAll" 
+          DependsOnTargets="$(PublishMySiteAllDependsOn)"
+          Inputs="@(PubMySiteAll)"
+          Outputs="@(PubMySiteAll->'$(ProdPublishFolder)%(RecursiveDir)%(FileName)%(Extension)')">
+    <Copy SourceFiles="@(PubMySiteAll)"
+          DestinationFiles="@(PubMySiteAll->'$(ProdPublishFolder)%(RecursiveDir)%(FileName)%(Extension)')"/>
+  </Target>
+
+  <Target Name="PublishAdminArea" 
+          DependsOnTargets="$(PublishAdminAreaDependsOn)"
+          Inputs="@(PubMySiteAdminArea)"
+          Outputs="@(PubMySiteAdminArea->'$(ProdPublishFolder)Areas\Admin\%(RecursiveDir)%(FileName)%(Extension)')">
+    <Copy SourceFiles="@(PubMySiteAdminArea)"
+          DestinationFiles="@(PubMySiteAdminArea->'$(ProdPublishFolder)Areas\Admin\%(RecursiveDir)%(FileName)%(Extension)')"/>
+  </Target>
+  
+  <Target Name="PublishHrArea" 
+          DependsOnTargets="$(PublishHrAreaDependsOn)"
+          Inputs="@(PubMySiteHrArea)"
+          Outputs="@(PubMySiteHrArea->'$(ProdPublishFolder)Areas\Hr\%(RecursiveDir)%(FileName)%(Extension)')">
+    <Copy SourceFiles="@(PubMySiteHrArea)"
+          DestinationFiles="@(PubMySiteHrArea->'$(ProdPublishFolder)Areas\Hr\%(RecursiveDir)%(FileName)%(Extension)')"/>
+  </Target>
+
+  <Target Name="GetPublishTargets">
+    <Message Text="
+Publish targets you can invoke on this build script.
+    PublishMySiteAll
+    PublishMySiteBin       
+    PublishAdminArea       
+    PublishHrArea       "
+             />
+  </Target>
+  
+  <!-- ***************************************************************************************
+ The targets below will be called during the publish process.
+ These targets are injected into the publish process for each web project.
+ These targets will not have access to any new values for properties/items from
+ the targets above this, but can be used to customize the publish process for
+ each project being published.
+ *************************************************************************************** -->
+
+  <Target Name="AfterWebPublish" AfterTargets="WebPublish">
+    <Message Text="Inside AfterWebPublish" Importance="high"/>
+  </Target>
+  
+</Project>
