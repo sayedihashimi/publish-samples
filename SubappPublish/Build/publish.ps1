@@ -38,6 +38,9 @@ function Get-MSBuildCommandArgs(){
     if($BuildProjects){
         $cmdArgs += "/p:BuildBeforePublish=true"
     }
+    else{
+        $cmdArgs += "/p:BuildBeforePublish=false"
+    }
 
     foreach($target in (Get-PublishTargetsFromParams)){
         $cmdArgs += ("/t:{0}" -f $target)
@@ -49,6 +52,9 @@ function Get-MSBuildCommandArgs(){
     # /flp1:"v=d;logfile=logs\%~n0.d.log" /flp2:"v=diag;logfile=logs\%~n0.diag.log"
     $cmdArgs += ('/flp1:"v=d;logfile={0}{1}.d.log" ' -f $logsDir, $logFileBaseName)
     $cmdArgs += ('/flp2:"v=diag;logfile={0}{1}.diag.log" ' -f $logsDir, $logFileBaseName)
+
+    # needed to give more details on the console
+    # $cmdArgs += "/clp:v=normal"
 
     return $cmdArgs
 }

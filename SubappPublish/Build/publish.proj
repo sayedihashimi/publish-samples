@@ -54,6 +54,8 @@
     
     <MSBuild Projects="@(ProjectsToBuild)"
              Properties="
+                RestorePackages=true;
+                RequireRestoreConsent=false;
                 VisualStudioVersion=$(VisualStudioVersion);
                 Configuration=$(Configuration);
                 OutputPath=$(OutputRoot);
@@ -86,11 +88,18 @@
     <ItemGroup>
       <PubMySiteBinFiles Include="$(PublishFolder)bin\**\*"/>
 
-      <PubMySiteAll Include="$(PublishFolder)**\*"/>
-
-      <PubMySiteAdminArea Include="$(PublishFolder)Areas\Admin\**\*"/>
+      <PubMySiteAllFiles Include="$(PublishFolder)**\*"/>
       
-      <PubMySiteHrArea Include="$(PublishFolder)Areas\HR\**\*"/>
+      <!-- All the files that go under Areas\Admin -->
+      <PubMySiteAdminAreaFiles Include="$(PublishFolder)Areas\Admin\**\*"/>
+      <!-- Admin area bin files (.dll/.pbd) which go into _RootSite\bin -->
+      <PubMySiteAdminAreaBinFiles Include="$(OutputRoot)AdminArea.*"/>
+
+      <!-- All the files that go under Areas\Hr -->
+      <PubMySiteHrAreaFiles Include="$(PublishFolder)Areas\HR\**\*"/>
+      <!-- HR area bin files (.dll/.pbd) which go into _RootSite\bin -->
+      <PubMySiteHrAreaBinFiles Include="$(OutputRoot)HrArea.*"/>
+      
     </ItemGroup>
   </Target>
 
@@ -101,42 +110,43 @@
           DependsOnTargets="$(PublishMySiteBinDependsOn)"
           Inputs="@(PubMySiteBinFiles)" 
           Outputs="@(PubMySiteBinFiles->'$(ProdPublishFolder)bin\%(RecursiveDir)%(FileName)%(Extension)')">
+    
     <Copy SourceFiles="@(PubMySiteBinFiles)" 
-          DestinationFiles="@(PubMySiteBinFiles->'$(ProdPublishFolder)bin\%(RecursiveDir)%(FileName)%(Extension)')"/>
+          DestinationFiles="@(PubMySiteBinFiles->'$(ProdPublishFolder)bin\%(RecursiveDir)%(FileName)%(Extension)')"/>    
   </Target>
   
   <Target Name="PublishMySiteAll" 
           DependsOnTargets="$(PublishMySiteAllDependsOn)"
-          Inputs="@(PubMySiteAll)"
-          Outputs="@(PubMySiteAll->'$(ProdPublishFolder)%(RecursiveDir)%(FileName)%(Extension)')">
-    <Copy SourceFiles="@(PubMySiteAll)"
-          DestinationFiles="@(PubMySiteAll->'$(ProdPublishFolder)%(RecursiveDir)%(FileName)%(Extension)')"/>
+          Inputs="@(PubMySiteAllFiles)"
+          Outputs="@(PubMySiteAllFiles->'$(ProdPublishFolder)%(RecursiveDir)%(FileName)%(Extension)')">
+    <Copy SourceFiles="@(PubMySiteAllFiles)"
+          DestinationFiles="@(PubMySiteAllFiles->'$(ProdPublishFolder)%(RecursiveDir)%(FileName)%(Extension)')"/>
   </Target>
 
   <Target Name="PublishAdminArea" 
           DependsOnTargets="$(PublishAdminAreaDependsOn)"
-          Inputs="@(PubMySiteAdminArea)"
-          Outputs="@(PubMySiteAdminArea->'$(ProdPublishFolder)Areas\Admin\%(RecursiveDir)%(FileName)%(Extension)')">
-    <Copy SourceFiles="@(PubMySiteAdminArea)"
-          DestinationFiles="@(PubMySiteAdminArea->'$(ProdPublishFolder)Areas\Admin\%(RecursiveDir)%(FileName)%(Extension)')"/>
+          Inputs="@(PubMySiteAdminAreaFiles);@(PubMySiteAdminAreaBinFiles)"
+          Outputs="@(PubMySiteAdminAreaFiles->'$(ProdPublishFolder)Areas\Admin\%(RecursiveDir)%(FileName)%(Extension)');@(PubMySiteAdminAreaBinFiles->'$(ProdPublishFolder)bin\%(RecursiveDir)%(FileName)%(Extension)')">
+    
+    <Copy SourceFiles="@(PubMySiteAdminAreaFiles)"
+          DestinationFiles="@(PubMySiteAdminAreaFiles->'$(ProdPublishFolder)Areas\Admin\%(RecursiveDir)%(FileName)%(Extension)')"
+          SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(PubMySiteAdminAreaBinFiles)"
+          DestinationFiles="@(PubMySiteAdminAreaBinFiles->'$(ProdPublishFolder)bin\%(RecursiveDir)%(FileName)%(Extension)')"
+          SkipUnchangedFiles="true"/>
+    
   </Target>
   
   <Target Name="PublishHrArea" 
           DependsOnTargets="$(PublishHrAreaDependsOn)"
-          Inputs="@(PubMySiteHrArea)"
-          Outputs="@(PubMySiteHrArea->'$(ProdPublishFolder)Areas\Hr\%(RecursiveDir)%(FileName)%(Extension)')">
-    <Copy SourceFiles="@(PubMySiteHrArea)"
-          DestinationFiles="@(PubMySiteHrArea->'$(ProdPublishFolder)Areas\Hr\%(RecursiveDir)%(FileName)%(Extension)')"/>
-  </Target>
-
-  <Target Name="GetPublishTargets">
-    <Message Text="
-Publish targets you can invoke on this build script.
-    PublishMySiteAll
-    PublishMySiteBin       
-    PublishAdminArea       
-    PublishHrArea       "
-             />
+          Inputs="@(PubMySiteHrAreaFiles);@(PubMySiteHrAreaBinFiles)"
+          Outputs="@(PubMySiteHrAreaFiles->'$(ProdPublishFolder)Areas\Hr\%(RecursiveDir)%(FileName)%(Extension)');@(PubMySiteHrAreaBinFiles->'$(ProdPublishFolder)bin\%(RecursiveDir)%(FileName)%(Extension)')">
+    
+    <Copy SourceFiles="@(PubMySiteHrAreaFiles)"
+          DestinationFiles="@(PubMySiteHrAreaFiles->'$(ProdPublishFolder)Areas\Hr\%(RecursiveDir)%(FileName)%(Extension)')"/>
+    <Copy SourceFiles="@(PubMySiteHrAreaBinFiles)"
+          DestinationFiles="@(PubMySiteHrAreaBinFiles->'$(ProdPublishFolder)bin\%(RecursiveDir)%(FileName)%(Extension)')"
+          SkipUnchangedFiles="true"/>
   </Target>
   
   <!-- ***************************************************************************************
